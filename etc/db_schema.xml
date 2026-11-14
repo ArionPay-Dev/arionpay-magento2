@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="arionpay_invoice" resource="sales" engine="innodb" comment="ArionPay invoices of orders">
+        <column xsi:type="varchar" name="invoice_id" length="24" nullable="false" comment="ArionPay invoice id"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" comment="Order entity id"/>
+        <column xsi:type="varchar" name="increment_id" length="50" nullable="false" comment="Order number"/>
+        <column xsi:type="varchar" name="invoice_url" length="255" nullable="false" comment="Payment page"/>
+        <column xsi:type="varchar" name="amount" length="32" nullable="false" comment="Amount"/>
+        <column xsi:type="varchar" name="currency" length="3" nullable="false" comment="Currency"/>
+        <column xsi:type="smallint" name="test" unsigned="true" nullable="false" default="0" comment="Test invoice"/>
+        <column xsi:type="varchar" name="status" length="20" nullable="false" default="new" comment="ArionPay status"/>
+        <column xsi:type="smallint" name="order_paid" unsigned="true" nullable="false" default="0" comment="Paid the order"/>
+        <column xsi:type="datetime" name="expires_at" nullable="true" comment="Expires (UTC)"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="invoice_id"/>
+        </constraint>
+        <index referenceId="ARIONPAY_INVOICE_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+    </table>
+    <table name="arionpay_event" resource="sales" engine="innodb" comment="ArionPay webhook events already handled">
+        <column xsi:type="varchar" name="event_id" length="64" nullable="false" comment="Event id"/>
+        <column xsi:type="varchar" name="invoice_id" length="24" nullable="false" comment="ArionPay invoice id"/>
+        <column xsi:type="varchar" name="type" length="32" nullable="false" comment="Event type"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Handled"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="event_id"/>
+        </constraint>
+    </table>
+</schema>

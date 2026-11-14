@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <arionpay>
+                <active>0</active>
+                <model>ArionPayFacade</model>
+                <title>Crypto (Bitcoin, USDT and more)</title>
+                <payment_action>authorize</payment_action>
+                <can_initialize>1</can_initialize>
+                <can_use_checkout>1</can_use_checkout>
+                <can_use_internal>0</can_use_internal>
+                <is_gateway>1</is_gateway>
+                <order_status>pending_payment</order_status>
+                <test_mode>1</test_mode>
+                <base_url>https://merchant.arionpay.com</base_url>
+                <api_secret backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <webhook_secret backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <allowspecific>0</allowspecific>
+                <debug>0</debug>
+                <sort_order>10</sort_order>
+            </arionpay>
+        </payment>
+    </default>
+</config>

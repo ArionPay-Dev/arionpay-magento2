@@ -1,0 +1,21 @@
+<?php
+/** @var \ArionPay\Payment\Block\Status $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$order = $block->getOrder();
+?>
+<?php if ($order): ?>
+<div class="arionpay-status" id="arionpay-status">
+    <?php if ($block->isPaid()): ?>
+        <p><strong><?= $escaper->escapeHtml(__('Thank you: your crypto payment for order #%1 has been received.', $order->getIncrementId())) ?></strong></p>
+    <?php elseif ($block->isClosed()): ?>
+        <p><?= $escaper->escapeHtml(__('Order #%1 is closed. If you already paid, please contact us.', $order->getIncrementId())) ?></p>
+    <?php else: ?>
+        <p><?= $escaper->escapeHtml(__('We have not received the crypto payment for order #%1 yet.', $order->getIncrementId())) ?></p>
+        <p><?= $escaper->escapeHtml(__('If you already paid, there is nothing to do: the order is updated as soon as the network confirms the payment. If you have not paid yet, you can pay now.')) ?></p>
+        <p><a class="action primary" id="arionpay-pay-now" href="<?= $escaper->escapeUrl($block->getPayUrl()) ?>"><span><?= $escaper->escapeHtml(__('Pay now with crypto')) ?></span></a></p>
+    <?php endif; ?>
+    <?php if ($block->isTest()): ?>
+        <p class="message notice"><span><?= $escaper->escapeHtml(__('Test mode: no real money is taken.')) ?></span></p>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

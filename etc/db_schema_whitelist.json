@@ -1,0 +1,34 @@
+{
+    "arionpay_invoice": {
+        "column": {
+            "invoice_id": true,
+            "order_id": true,
+            "increment_id": true,
+            "invoice_url": true,
+            "amount": true,
+            "currency": true,
+            "test": true,
+            "status": true,
+            "order_paid": true,
+            "expires_at": true,
+            "created_at": true
+        },
+        "index": {
+            "ARIONPAY_INVOICE_ORDER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "arionpay_event": {
+        "column": {
+            "event_id": true,
+            "invoice_id": true,
+            "type": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
